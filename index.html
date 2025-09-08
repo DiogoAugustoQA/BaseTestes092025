@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Base de Testes - Setembro/2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Teak -->
+    <!-- Application Structure Plan: A dashboard-style SPA using tabbed navigation (GIP, Ponto). This structure was chosen to logically segment the test data, preventing overwhelming the user with a single long list. It allows QA testers to quickly navigate to the specific module they are testing. The key interaction is the one-click copy buttons for all test data IDs to improve workflow efficiency. -->
+    <!-- Visualization & Content Choices: 1. Test Data Lists: Report Info -> Specific employee/card IDs. Goal -> Organize/Inform. Viz -> Styled list items inside cards. Interaction -> Click-to-copy icon. Justification -> Speeds up testing workflow, reduces errors. Method -> HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #3d3d3d;
+        }
+        .active-tab {
+            background-color: #0d9488 !important;
+            color: white !important;
+        }
+        .copy-icon {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .copy-icon:hover {
+            opacity: 1;
+        }
+        .copy-feedback {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2dd4bf;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+            pointer-events: none;
+        }
+        .copy-feedback.show {
+            opacity: 1;
+            bottom: 125%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-teal-800">Painel Interativo da Base de Testes</h1>
+            <p class="text-lg text-gray-600 mt-2">Ciclo de Setembro/2025</p>
+        </header>
+
+        <main>
+            <div id="info-essenciais" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">Versão do Sistema</h2>
+                    <div class="flex items-center justify-between">
+                        <code class="text-teal-700 bg-teal-50 p-2 rounded text-sm md:text-base">DTM_v14.03-M_22082025.exe</code>
+                        <span class="text-xs text-gray-500 ml-2">Instalada em 22/08/2025</span>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-cyan-500">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">Backups para Restauração</h2>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center justify-between" data-copy-container>
+                            <span class="font-mono text-cyan-800">COBOL: <span data-copy-target>...BASE141(09-2025)v1403M-Pct22-08-2025.zip</span></span>
+                             <div class="relative">
+                                <svg class="w-5 h-5 text-gray-500 copy-icon" data-copy-path="D:\BASES\RAIZ\BASE141\BASE141(09-2025)v1403M-Pct22-08-2025.zip" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between" data-copy-container>
+                            <span class="font-mono text-cyan-800">SQL: <span data-copy-target>...BASE141(09-2025)v1403M-Pct22-08-2025.bak</span></span>
+                             <div class="relative">
+                                <svg class="w-5 h-5 text-gray-500 copy-icon" data-copy-path="E:\DBA\SQL2019\MSSQL15.MSSQLSERVER\MSSQL\Backup\BASE141\BASE141(09-2025)v1403M-Pct22-08-2025.bak" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4 mb-8">
+                <nav id="tabs" class="flex flex-wrap items-center justify-center gap-2">
+                    <button data-tab="gip" class="tab-btn px-4 py-2 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-teal-500 hover:text-white transition-colors duration-200 active-tab">G.I.P. - Gestão Integrada de Pessoas</button>
+                    <button data-tab="ponto" class="tab-btn px-4 py-2 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-teal-500 hover:text-white transition-colors duration-200">Ponto Eletrônico</button>
+                </nav>
+            </div>
+
+            <div id="tab-content">
+                <div id="gip" class="tab-pane">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800">GIP - Ciclo de Vida do Colaborador</h2>
+                        <p class="text-gray-600 mt-1">Dados para testar os fluxos de admissão, férias, afastamentos e desligamentos.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 1: Novas Admissões</h3>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: ENE - Re: 765</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: 004 - Re: 887</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: DGO - Re: 34</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                            <p class="text-xs text-gray-500 mt-3">✅ Inclui fotos, dependentes e assistência médica.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 2: Férias</h3>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: ENE - Re: 358, 367, 385, 388</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: 004 - Re: 873, 874, 875, 876</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 3: Afastamentos</h3>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Doença (P3): Emp: ENE - Re: 290</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Acidente (O3): Emp: 004 - Re: 515</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 4: Desligamento e Retorno</h3>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Rescisão: Emp: ENE - Re: 565</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Reintegração: Emp: ENE - Re: 435</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ponto" class="tab-pane hidden">
+                     <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800">Módulo Ponto Eletrônico</h2>
+                        <p class="text-gray-600 mt-1">Dados para testar a sincronia de cadastros, apontamentos e cenários de exceção.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 5: Sincronia Cadastral GIP & Ponto</h3>
+                             <p class="text-xs text-gray-500 mb-3">Crachás vinculados às novas admissões.</p>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: DGO - Cr: 880000034</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: ENE - Cr: 765</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: 004 - Cr: 887</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-lg mb-4 text-teal-800">Cenário 6: Manutenção do Apontamento</h3>
+                            <p class="text-xs text-gray-500 mb-3">Ajustes manuais e exceções para crachás existentes.</p>
+                            <ul class="space-y-3">
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: ENE - Cr: 1, 2, 7, 50, 52, 11001, 11002</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: 004 - Cr: 438, 519, 646, 14001</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                                <li data-copy-container class="flex justify-between items-center p-2 bg-gray-50 rounded"><span class="font-mono text-sm" data-copy-target>Emp: DAT - Cr: 1000</span><div class="relative"><svg class="w-5 h-5 text-gray-500 copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0 0V11.25m0 0a2.625 2.625 0 015.25 0V12m-5.25 0a2.625 2.625 0 00-5.25 0v6.375a2.625 2.625 0 005.25 0V12z" /></svg></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const tabId = this.dataset.tab;
+
+                    tabs.forEach(item => item.classList.remove('active-tab'));
+                    this.classList.add('active-tab');
+
+                    tabPanes.forEach(pane => {
+                        if (pane.id === tabId) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const chartData = {
+                labels: ['Admissões', 'Férias', 'Afastamentos', 'Deslig./Reint.', 'Crachás', 'Manutenção Ponto'],
+                datasets: [{
+                    label: 'Novos Itens de Teste',
+                    data: [3, 8, 2, 2, 3, 12],
+                    backgroundColor: [
+                        '#14b8a6',
+                        '#2dd4bf',
+                        '#06b6d4',
+                        '#0ea5e9',
+                        '#67e8f9',
+                        '#a5f3fc'
+                    ],
+                    borderColor: '#f8f7f4',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            };
+
+            const ctx = document.getElementById('overviewChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: "'Inter', sans-serif"
+                                    },
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                bodyFont: {
+                                    family: "'Inter', sans-serif"
+                                },
+                                titleFont: {
+                                    family: "'Inter', sans-serif"
+                                },
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed + ' registros';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+            
+            const copyContainers = document.querySelectorAll('[data-copy-container]');
+            copyContainers.forEach(container => {
+                const icon = container.querySelector('.copy-icon');
+                const target = container.querySelector('[data-copy-target]');
+                
+                let textToCopy = target.textContent;
+                if(icon.dataset.copyPath){
+                    textToCopy = icon.dataset.copyPath;
+                }
+
+                icon.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        showCopyFeedback(icon, 'Copiado!');
+                    } catch (err) {
+                        showCopyFeedback(icon, 'Falhou!');
+                    }
+                    document.body.removeChild(textArea);
+                });
+            });
+
+            function showCopyFeedback(element, message) {
+                const feedbackEl = document.createElement('div');
+                feedbackEl.textContent = message;
+                feedbackEl.className = 'copy-feedback';
+                
+                const parentRelative = element.closest('.relative');
+                if(parentRelative) {
+                    parentRelative.appendChild(feedbackEl);
+                    
+                    setTimeout(() => {
+                        feedbackEl.classList.add('show');
+                    }, 10);
+
+                    setTimeout(() => {
+                        feedbackEl.classList.remove('show');
+                        setTimeout(() => {
+                           if(feedbackEl.parentNode) {
+                               feedbackEl.parentNode.removeChild(feedbackEl);
+                           }
+                        }, 300);
+                    }, 1500);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
